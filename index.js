@@ -8,7 +8,7 @@ const db = require("./db/index")
 app.use(cors())
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(express.static('./public'))
+app.use(express.static('./accesstokey-web/dist'))
 
 function updateHeader(req, res, next) {
   const target = req.headers.authorization.split(' ')
