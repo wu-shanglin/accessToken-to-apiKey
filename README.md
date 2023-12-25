@@ -39,6 +39,8 @@
 
 ## 使用方法
 
+##### **将请求accesstokey的地址改为http\://youdomain:4090/api，后面要带上/api**
+
 登陆后点击添加按钮，填入access token,完成后会生成一个key，该key与openai的sk-key类似，使用该key将请求带入accesstokey，它会将Authorization的Bearer key自动转换成Authorization Bearer再向ninjia请求
 
 #### 下图是单独使用的效果
