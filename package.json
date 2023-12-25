@@ -4,7 +4,8 @@
   "description": "一个可以将chatgpt access token转换成api key的工具，可以接入one-api进行额度调配",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
