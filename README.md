@@ -2,7 +2,6 @@
 
 本项目对接的是[ninjia](https://github.com/gngpp/ninja)项目，可以使chatgpt的access token转换成key的形式，给某些无法写入access token当key用的服务使用，如[one-api](https://github.com/songquanpeng/one-api)等
 
-
 ## 特色
 
 1.  web端管理
@@ -35,6 +34,7 @@
 
     #运行后端
     cd ..
+    npm install
     node index.js
 
 ## 使用方法
