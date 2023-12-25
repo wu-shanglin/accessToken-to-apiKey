@@ -13,16 +13,17 @@
 1.  在mysql创建一个名为accesstokey的数据库(建议使用phpmyadmin或mysql workbench)
 2.  进入该数据库，创建一个表名为channel的数据表，拥有以下字段
 
-    | 列名     | 数据类型         | 约束(&分割)        | 默认值 |
-    | :----- | :----------- | :------------- | :-- |
-    | id     | INT          | PK\&NN\&UQ\&AI |     |
-    | name   | VARCHAR(45)  | NN             |     |
-    | access | TEXT         | NN             |     |
-    | key    | VARCHAR(255) | PK\&NN\&UQ     |     |
-    | status | TINYINT      |                | 1   |
+    | 列名      | 数据类型         | 约束(&分割)        | 默认值 |
+    | :------ | :----------- | :------------- | :-- |
+    | id      | INT          | PK\&NN\&UQ\&AI |     |
+    | name    | VARCHAR(45)  | NN             |     |
+    | access  | TEXT         | NN             |     |
+    | session | TEXT         |                |     |
+    | key     | VARCHAR(255) | PK\&NN\&UQ     |     |
+    | status  | TINYINT      |                | 1   |
 3.  将仓库克隆下来后修改config.js文件，使后端能连接上你的数据库及ninjia请求地址
 
-<!---->
+
 
     # 将代码克隆到本地
     git clone https://github.com/wu-shanglin/accessToken-to-apiKey.git
