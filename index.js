@@ -32,7 +32,7 @@ function updateHeader(req, res, next) {
 }
 
 const proxy_handle = proxy.createProxyMiddleware({
-  target: config.openai_url,
+  target: config.ninjia_url,
   changeOrigin: true,
   ws: true,
   pathRewrite: {
