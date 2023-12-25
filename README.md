@@ -28,7 +28,7 @@
     git clone https://github.com/wu-shanglin/accessToken-to-apiKey.git
 
     #构建前端
-    cd accessToken-to-apiKey
+    cd accessToken-to-apiKey/accesstokey-web
     npm install
     npm run build
 
