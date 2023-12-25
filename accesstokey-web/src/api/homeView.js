@@ -44,9 +44,21 @@ function apiUpdateTranslate(data) {
     data: data
   })
 }
+
+function apiRefreshAccess(data) {
+  return service({
+    method: "POST",
+    url: "/edit/refreshaccess",
+    headers: {
+      "Authorization": info.token
+    },
+    data: data
+  })
+}
 export {
   apiAllData,
   apiAddTranslate,
   apiDeleteTranslate,
-  apiUpdateTranslate
+  apiUpdateTranslate,
+  apiRefreshAccess
 }

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { apiAllData, apiAddTranslate, apiDeleteTranslate, apiUpdateTranslate } from "@/api/homeView.js"
+import { apiAllData, apiAddTranslate, apiDeleteTranslate, apiUpdateTranslate, apiRefreshAccess } from "@/api/homeView.js"
 import useInfo from "@/pinia/index"
 import { useRouter } from 'vue-router';
 const router = useRouter()
@@ -44,23 +44,6 @@ function handleCopy(scope) {
   // navigator.clipboard.copy(scope.row.key);
 }
 
-// 删除
-const itemsBtnIsDisabled = ref(false)
-async function handleDelete(scope) {
-  itemsBtnIsDisabled.value = true
-  const { data } = await apiDeleteTranslate({
-    id: scope.row.id
-  });
-  if (data.status === 200) {
-    ElMessage({
-      message: '删除成功',
-      type: 'success',
-    })
-    itemsBtnIsDisabled.value = false
-    getList()
-  }
-}
-
 
 // 添加转换
 const dialogVisible = ref(false)
@@ -84,7 +67,55 @@ async function confirmAdd(e) {
     dialogVisible.value = false;
     addLoading.value = false;
     getList()
+  } else {
+    ElMessage({
+      message: '添加失败',
+      type: 'error',
+    })
   }
+}
+
+
+// 删除
+const itemsBtnIsDisabled = ref(false)
+async function handleDelete(scope) {
+  itemsBtnIsDisabled.value = true
+  const { data } = await apiDeleteTranslate({
+    id: scope.row.id
+  });
+  if (data.status === 200) {
+    ElMessage({
+      message: '删除成功',
+      type: 'success',
+    })
+    getList()
+  } else {
+    ElMessage({
+      message: '删除失败',
+      type: 'error',
+    })
+  }
+  itemsBtnIsDisabled.value = false
+}
+
+// 刷新access token
+async function handleRefresh(scope) {
+  if (itemsBtnIsDisabled.value) return;
+  itemsBtnIsDisabled.value = true
+  const { data } = await apiRefreshAccess({ id: scope.row.id });
+  if (data.status == 200) {
+    ElMessage({
+      message: '刷新成功',
+      type: 'success',
+    })
+  } else {
+    ElMessage({
+      message: '刷新失败',
+      type: 'error',
+    })
+    console.log(data);
+  }
+  itemsBtnIsDisabled.value = false
 }
 
 // 编辑 
@@ -109,10 +140,16 @@ async function confirmUpdate() {
     })
     updateForm.value = new Object();
     updateFormVisible.value = false;
-    updateLoading.value = false;
     getList()
+  } else {
+    ElMessage({
+      message: '修改失败',
+      type: 'error',
+    })
   }
+  updateLoading.value = false;
 }
+
 
 // 注销
 function logout() {
@@ -124,6 +161,7 @@ function logout() {
   })
   router.push('/login')
 }
+
 </script>
 
 <template>
@@ -142,11 +180,14 @@ function logout() {
       <el-table :data="tableData" border style="width: 100%" table-layout="fixed">
         <el-table-column type="index" :index="1" align="center" />
         <el-table-column prop="access" label="access token" style="max-width: 200px" align="center" />
+        <el-table-column prop="session" label="session" style="max-width: 200px" align="center" />
         <el-table-column prop="name" label="别名" width="100" align="center" />
         <el-table-column prop="key" label="key" align="center" :show-overflow-tooltip="true" />
-        <el-table-column label="操作" align="center" width="250">
+        <el-table-column label="操作" align="center" width="350">
           <template #default="scope">
             <el-button type="success" @click="handleCopy(scope)">复制key</el-button>
+            <el-button type="success" @click="handleRefresh(scope)" :disabled="scope.row.session == null ? true : false"
+              :loading="itemsBtnIsDisabled">刷新key</el-button>
             <el-button type="primary" @click="handleEdit(scope)">编辑</el-button>
             <el-button type="danger" @click="handleDelete(scope)" :loading="itemsBtnIsDisabled">删除</el-button>
           </template>
@@ -162,6 +203,9 @@ function logout() {
         </el-form-item>
         <el-form-item label="access token">
           <el-input v-model="form.access" placeholder="请输入access token" />
+        </el-form-item>
+        <el-form-item label="session">
+          <el-input v-model="form.session" placeholder="可不填，但无法快速更新access token" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -179,6 +223,9 @@ function logout() {
         </el-form-item>
         <el-form-item label="access token">
           <el-input v-model="updateForm.access" placeholder="请输入access token" />
+        </el-form-item>
+        <el-form-item label="session">
+          <el-input v-model="updateForm.session" placeholder="可不填，但无法快速更新access token" />
         </el-form-item>
       </el-form>
       <template #footer>
