@@ -2,6 +2,7 @@ const obj = {
   username: "root",
   password: "123456",
   jwtSecret: "accesstokey",
+  server_port: 4090,
   openai_url: 'https://youProxyUrl.com',
   db_host: '127.0.0.1',
   db_user: 'accesstokey',

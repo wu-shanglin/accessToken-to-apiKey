@@ -69,4 +69,6 @@ app.use((err, req, res, next) => {
   res.cc(err);
   // next()
 });
-app.listen(80)
+app.listen(config.server_port, () => {
+  console.log(`server is running at port ${config.server_port}`)
+})
