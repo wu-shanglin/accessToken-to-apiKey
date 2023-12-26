@@ -26,18 +26,20 @@
 
 
 
-    # 将代码克隆到本地
-    git clone https://github.com/wu-shanglin/accessToken-to-apiKey.git
+```markdown
+# 将代码克隆到本地
+git clone https://github.com/wu-shanglin/accessToken-to-apiKey.git
 
-    #构建前端
-    cd accessToken-to-apiKey/accesstokey-web
-    npm install
-    npm run build
+#构建前端
+cd accessToken-to-apiKey/accesstokey-web
+npm install
+npm run build
 
-    #运行后端
-    cd ..
-    npm install
-    node index.js
+#运行后端
+cd ..
+npm install
+node index.js
+```
 
 ## 使用方法
 
