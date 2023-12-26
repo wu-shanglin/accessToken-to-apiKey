@@ -51,7 +51,7 @@
 graph LR
 
     A(用户) --->|使用key请求accesstokey| B(accesstokey)
-    B -->|中继请求| C(ninjia)
+    B -->|将key转换为access token中继请求| C(ninjia)
 
 ```
 
@@ -62,7 +62,7 @@ graph LR
 
 G(用户) --->|使用one-api提供的key请求| A(one-api)
     A --->|使用accesstokey提供的key请求| B(accesstokey)
-    B -->|中继请求| C(ninjia)
+    B -->|将key转换为access token中继请求| C(ninjia)
 
 ```
 
